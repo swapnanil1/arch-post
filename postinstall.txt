@@ -18,7 +18,7 @@ sudo pacman -S reflector
 sudo reflector --verbose --country 'India' -l 15 --sort rate --protocol https --save /etc/pacman.d/mirrorlist
 
 # setup terminal & neovim 
-sudo pacman -S alacritty starship neovim xclip python-pynvim nodejs npm 
+sudo pacman -S alacritty starship neovim fd ripgrep xclip python-pynvim nodejs npm 
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 #git clone git@github.com:swapnanil1/nvchad-py.git
 
