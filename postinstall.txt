@@ -13,35 +13,41 @@ Description = Cleaning pacman cache...
 When = PostTransaction
 Exec = /usr/bin/paccache -rk 2
 
-pacman -S reflector
-
+#Setup Mirrors 
+sudo pacman -S reflector
 sudo reflector --verbose --country 'India' -l 15 --sort rate --protocol https --save /etc/pacman.d/mirrorlist
 
-# setup text editor 
-sudo pacman -S neovim xclip python-pynvim nodejs npm 
+# setup terminal & neovim 
+sudo pacman -S alacritty starship neovim xclip python-pynvim nodejs npm 
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 #git clone git@github.com:swapnanil1/nvchad-py.git
 
 #Apps for kde 
-sudo pacman -S --needed timeshift ttf-roboto ttf-jetbrains-mono-nerd inter-font bash-completion packagekit-qt5 okular gwenview ksnip kvantum keepassxc vlc qbittorrent syncthing code bleachbit thunderbird 
+sudo pacman -S --needed timeshift bash-completion packagekit-qt5 okular gwenview ksnip kvantum keepassxc vlc qbittorrent syncthing code bleachbit thunderbird 
 
 #Apps for cinnamon desktop
-sudo pacman -S --needed arc-gtk-theme arc-icon-theme papirus-icon-theme xed xreader geeqie galculator flameshot gparted ntfs-3g mpv
+sudo pacman -S --needed timeshift bash-completion xed xreader geeqie galculator flameshot gparted ntfs-3g mpv
+qbittorrent bleachbit thunderbird 
 
-#AUR
-yay -S onlyoffice-bin portmaster-stub-bin visual-studio-code-bin librewolf-bin brave-bin google-chrome heroic-games-launcher-bin 
+#Apps for gnome 
+sudo pacman -S --needed timeshift ttf-roboto ttf-jetbrains-mono-nerd bash-completion keepassxc vlc qbittorrent bleachbit gparted ntfs-3g mpv
 
-sudo pacman -S linux-headers dkms ufw --needed
+#Setup themes
+sudo pacman -S --needed arc-gtk-theme arc-icon-theme papirus-icon-theme
+
+#Essential Packages
+sudo pacman -S git linux-headers dkms ufw eza --needed
 sudo pacman -S jshon expac exa git wget acpid avahi net-tools xdg-user-dirs --needed
 systemctl enable acpid avahi-daemon systemd-timesyncd --needed
 systemctl enable fstrim.timer
 
-#Input Driver
+#Input Driver (Optional)
 sudo pacman -S xf86-input-synaptics xf86-input-libinput xf86-input-evdev --needed
 
 #Sound Drivers
 sudo pacman -S alsa-utils pipewire pipewire-pulse pipewire-jack wireplumber --needed
-sudo pacman -S pavucontrol-qt
+#Optional Sound management
+sudo pacman -S pavucontrol-qt 
 
 #Some archive and file system utils
 sudo pacman -S p7zip unrar unarchiver unzip unace xz rsync --needed
@@ -58,11 +64,40 @@ ttf-bitstream-vera ttf-dejavu ttf-droid ttf-fira-mono ttf-fira-sans ttf-freefont
 sudo pacman -S android-tools android-udev
 usermod -aG adbusers yourusername
 
-#Display Drivers
+## Config .bashrc
+#Fixing ls to use eza (Add to .bashrc)
+alias ls='eza -al --color=always --group-directories-first'
+alias pi='sudo pacman -S'
+alias pr='sudo pacman -R'
+alias prr='sudo pacman -Rns'
+eval "$(starship init bash)"
+
+#Install Yay
+mkdir repos
+cd repos
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+
+#Usefull AUR Apps 
+yay -S onlyoffice-bin portmaster-stub-bin visual-studio-code-bin librewolf-bin brave-bin google-chrome heroic-games-launcher-bin 
+
+#Davinci Resolve (AMD)
+sudo pacman -S --needed libxcrypt-compat rocm-core libarchive xdg-user-dirs patchelf rocm-opencl-runtime
+vim /etc/environment
+add the line
+ROC_ENABLE_PRE_VEGA=1
+
+##Display Drivers 
+#(AMD)
 sudo pacman -S --needed lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader \
 libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau libva-vdpau-driver lib32-libva-vdpau-driver
+#(Intel)
+sudo pacman -S --needed lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader
+#(NVIDEA)
+sudo pacman -S --needed nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader
 
-#Wine Lutris Steam Gamemode
+#Wine Lutris Steam Gamemode 
 sudo pacman -S --needed steam lutris gamemode lib32-gamemode mangohud lib32-mangohud wine-staging wine-mono wine-gecko winetricks cabextract unzip \
 giflib lib32-libnm lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
 mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
@@ -75,16 +110,5 @@ lib32-libxss lib32-nspr lib32-nss lsb-release lsof usbutils xorg-xrandr zenity p
 lib32-libxxf86vm lib32-libxml2 lib32-openssl nss-mdns lib32-gstreamer gstreamer gsm lib32-fontconfig \
 lib32-glu lib32-libsm lib32-libice gst-plugins-good lib32-gst-plugins-base lib32-gst-plugins-good sane
 
-#Common game dependencies
+#Common game dependencies (Takes TIME TO COMPILE)
 FONTS-> yay -S ttf-ms-win11-auto lib32-gsm
-
-# Extra Lutris Dependeny Not needed Files
-sudo pacman -S --needed python-attrs  python-cffi python-cryptography python-packaging python-ply python-pycparser python-wheel
-
-#Davinci Resolve 
-sudo pacman -S --needed libxcrypt-compat rocm-core libarchive xdg-user-dirs patchelf rocm-opencl-runtime
-
-vim /etc/environment
-add the line
-ROC_ENABLE_PRE_VEGA=1
-
