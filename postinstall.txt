@@ -1,3 +1,6 @@
+#Connect to internet/wifi
+nmcli or iwctl 
+Activate a connection ->
 #Auto clean package cache
 sudo pacman -S pacman-contrib
 sudo mkdir /etc/pacman.d/hooks
