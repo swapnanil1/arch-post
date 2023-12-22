@@ -16,6 +16,11 @@ Description = Cleaning pacman cache...
 When = PostTransaction
 Exec = /usr/bin/paccache -rk 2
 
+#Setup ZSH Shell
+sudo pacman -S zsh 
+chsh -s /usr/bin/zsh
+sh -c "$(wget -O- https://install.ohmyz.sh/)"
+
 #Setup Mirrors 
 sudo pacman -S reflector
 sudo reflector --verbose --country 'India' -l 15 --sort rate --protocol https --save /etc/pacman.d/mirrorlist
