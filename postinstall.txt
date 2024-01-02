@@ -44,10 +44,11 @@ sudo pacman -S --needed timeshift ttf-roboto ttf-jetbrains-mono-nerd bash-comple
 sudo pacman -S --needed arc-gtk-theme arc-icon-theme papirus-icon-theme
 
 #Essential Packages
-sudo pacman -S git linux-headers dkms ufw eza --needed
-sudo pacman -S jshon expac exa git wget acpid avahi net-tools xdg-user-dirs --needed
+sudo pacman -S git linux-headers dkms ufw eza  --needed
+sudo pacman -S jshon expac exa git wget acpid avahi net-tools xdg-user-dirs cronie --needed
 systemctl enable acpid avahi-daemon systemd-timesyncd --needed
 systemctl enable fstrim.timer
+systemctl enable cronie.service
 
 #Input Driver (Optional)
 sudo pacman -S xf86-input-synaptics xf86-input-libinput xf86-input-evdev --needed
