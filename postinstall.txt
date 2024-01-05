@@ -31,7 +31,16 @@ git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 #git clone git@github.com:swapnanil1/nvchad-py.git
 
 #Apps for kde 
-sudo pacman -S --needed timeshift bash-completion packagekit-qt5 okular gwenview ksnip kvantum keepassxc vlc qbittorrent syncthing code bleachbit thunderbird 
+sudo pacman -S --needed timeshift bash-completion packagekit-qt5 okular gwenview ksnip kvantum keepassxc vlc qbittorrent syncthing code bleachbit thunderbird kdeconnect sshfs netcat
+
+#troubleshoot for KDEconnect
+sudo netstat -tunelp | grep -i kdeconnect                 #check if kdeconnect is running
+netcat -z -v <phone's ip in settings> 1714-1764           #check if ip is blocked by firewall paste ip without <>
+killall kdeconnectd                                       #Kill Kdeconnect
+mv ~/.config/kdeconnect ~/.config/kdeconnect.bak          #delete current config as save backup
+sudo ufw allow 1714:1764/udp                              #allow kdeconnect ports udp
+sudo ufw allow 1714:1764/tcp                              #allow kdeconnect ports tcp
+sudo ufw reload                                           #apply rules and open kdeconnect 
 
 #Apps for cinnamon desktop
 sudo pacman -S --needed timeshift bash-completion xed xreader geeqie galculator flameshot gparted ntfs-3g mpv
