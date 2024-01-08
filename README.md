@@ -240,7 +240,7 @@ sudo pacman -S --needed arc-gtk-theme arc-solid-gtk-theme arc-icon-theme papirus
 #### Cinnamon Desktop Apps
 
 ```
-yay -S xed xviewer xreader geeqie galculator gnome-screenshot gparted
+yay -S pix xviewer webapp-manager xed xreader galculator gnome-screenshot gparted
 ```
 
 #### Setup Terminal, Prompt, Neovim, and LazyVim
