@@ -26,13 +26,13 @@ Organize your personal applications and set up a simplified bash environment wit
 
 ```bash
 # Browser
-yay -S firefox chromium google-chrome brave-bin librewolf-bin torbrowser-launcher
+yay -S --needed firefox chromium google-chrome brave-bin librewolf-bin torbrowser-launcher
 
 # Other Apps
-yay -S thunderbird discord telegram-desktop keepassxc mpv qbittorrent bleachbit appimagelauncher onlyoffice-bin visual-studio-code-bin heroic-games-launcher-bin
+yay -S --needed thunderbird discord telegram-desktop keepassxc mpv qbittorrent bleachbit appimagelauncher onlyoffice-bin visual-studio-code-bin heroic-games-launcher-bin
 
 # Remap Keys on keyboard
-yay -S input-remapper-git
+yay -S --needed input-remapper-git
 sudo systemctl restart input-remapper
 sudo systemctl enable input-remapper
 
@@ -202,7 +202,7 @@ sudo pacman -S --needed xf86-input-vmmouse   # Required when installing inside a
 
 Enable Wi-Fi connectivity, particularly for laptops, by installing the necessary tools:
 
-```
+```pi
 sudo pacman -S --needed wireless_tools wpa_supplicant ifplugd dialog
 ```
 
@@ -216,6 +216,23 @@ sudo pacman -S --needed bluez bluez-utils
 
 # Enable Bluetooth Service
 systemctl enable bluetooth
+```
+
+#### Granting Read/Write Permissions to Linux Hard Drives
+
+To grant read and write permissions to a Linux hard drive, use the chmod command in the terminal.
+
+```
+sudo chown -v your_username:your_username /media/your_external_drive
+```
+
+#### Improve Read/Write Speeds on Linux Hard Drives
+
+Boost Linux Hard Drive Speeds: Add "notime" & "discard=async" in fstab
+Enhance read/write speeds by editing /etc/fstab:
+
+```
+UUID=<your_UUID> /mnt/your_mount btrfs rw,noatime,ssd,discard=async,space_cache=v2 0 0
 ```
 
 ## Multimedia & Utilities - KDE, Gnome, Cinnamon, Terminal Setup, and More
@@ -237,10 +254,11 @@ sudo pacman -S --needed gnome-shell-extension-appindicator gnome-shell-extension
 sudo pacman -S --needed arc-gtk-theme arc-solid-gtk-theme arc-icon-theme papirus-icon-theme
 ```
 
-#### Cinnamon Desktop Apps
+#### Cinnamon Desktop Apps & Themes
 
 ```
-yay -S pix xviewer webapp-manager xed xreader galculator gnome-screenshot gparted
+yay -S --needed pix xviewer webapp-manager xed xreader galculator gnome-screenshot gparted webkit2gtk
+yay -S --needed mint-themes mint-y-icons mint-backgrounds
 ```
 
 #### Setup Terminal, Prompt, Neovim, and LazyVim
@@ -352,8 +370,16 @@ sudo pacman -S --needed mangohud lib32-mangohud goverlay
 #### Common Game Dependencies (Compilation takes time)
 
 ```
-yay -S ttf-ms-win11-auto lib32-gsm
+yay -S --needed ttf-ms-win11-auto lib32-gsm
 ```
+
+#### Use Custom Kernel & Wine
+
+"Installing a faster kernel could get you more if not same fps as a debloated windows installation"
+[Linux-Tkg](https://github.com/Frogging-Family/linux-tkg) is always recommended
+Watch [A1RM4X](https://youtu.be/QIEyv-Pnh0w?si=xBIZg6HLMzp9aP2X) video to install & setup
+
+[wine-tkg-git](https://github.com/Frogging-Family/wine-tkg-git/actions/workflows/wine-arch.yml) is a custom wine-staging build recommended to install if you want absolute wine gaming performance. you must be logged in to github to access prebuilt.
 
 #### Davinci Resolve (AMD) GPU Prerequisites
 
