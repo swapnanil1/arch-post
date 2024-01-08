@@ -127,6 +127,7 @@ Install the necessary graphics driver components for AMD GPUs:
 ```
 sudo pacman -S --needed mesa lib32-mesa libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau \
 vulkan-icd-loader lib32-vulkan-icd-loader vulkan-radeon lib32-vulkan-radeon libva-vdpau-driver lib32-libva-vdpau-driver
+opencl-clover-mesa lib32-opencl-clover-mesa opencl-rusticl-mesa lib32-opencl-rusticl-mesa rocm-opencl-runtime
 ```
 
 #### Archive and File System Utilities
